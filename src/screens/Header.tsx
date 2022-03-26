@@ -48,6 +48,7 @@ const AltLabel = styled.span`
 const Occupation = styled.div`
   margin-top: 20px;
   display: flex;
+  align-items: center;
 
   @media (max-width: 600px) {
     flex-direction: column;
@@ -61,7 +62,7 @@ const IconList = styled.div`
 `;
 
 const Link = styled.a`
-  margin-right: 30px;
+  margin: 0px 10px;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -141,7 +142,7 @@ const Header = () => {
       </TopIconList>
       <IconList>
         <Link
-          href="https://www.linkedin.com/in/shahid-xd//"
+          href="https://www.linkedin.com/in/shahid-xd/"
           target="_blank"
           rel="noreferrer"
         >
