@@ -1,5 +1,3 @@
-import { v4 } from "uuid";
-
 export enum SkillLevel {
   AVERAGE = "EXPOSED",
   GOOD = "GOOD",

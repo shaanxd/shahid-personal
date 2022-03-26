@@ -37,7 +37,7 @@ const Title = styled(Label)`
 
 const AltLabel = styled.span`
   font-weight: 800;
-  color: ${colors.PRIMARY_LIGHT};
+  color: ${colors.PRIMARY};
 `;
 
 const Description = styled(Label)`
