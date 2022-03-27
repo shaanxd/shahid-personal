@@ -53,6 +53,10 @@ const Card = styled.div`
   &:hover {
     transform: scale(1.2);
   }
+
+  @media (max-width: 600px) {
+    max-width: unset;
+  }
 `;
 
 interface TimePaneStyleProps {
