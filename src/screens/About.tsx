@@ -9,6 +9,7 @@ import {
 } from "react-circular-progressbar";
 
 import "react-circular-progressbar/dist/styles.css";
+import projects, { Project } from "../data/projects";
 
 const asOfDate = "26th March 2022";
 
@@ -29,6 +30,7 @@ const Title = styled(Label)`
   font-size: 50px;
   font-weight: 600;
   padding-bottom: 2px;
+  margin-top: 20px;
 
   @media (max-width: 600px) {
     font-size: 35px;
@@ -54,23 +56,6 @@ const TextContainer = styled.div`
   max-width: 800px;
 `;
 
-const Button = styled.a`
-  margin-top: 30px;
-  padding: 20px 10px;
-  border-radius: 10px;
-  border: 1px solid ${colors.PRIMARY};
-  background-color: ${colors.PRIMARY};
-  color: ${colors.WHITE};
-  font-size: 17px;
-  cursor: pointer;
-  text-align: center;
-
-  :-webkit-any-link {
-    text-decoration: none;
-    -webkit-text-decoration: none;
-  }
-`;
-
 const Anchor = styled.a`
   color: ${colors.PRIMARY};
   cursor: pointer;
@@ -93,14 +78,9 @@ const SkillsContainer = styled.div`
 
 const SkillRoot = styled.div`
   display: flex;
-  margin: 10px 0px;
+  margin: 15px 0px;
   display: flex;
   flex-direction: column;
-`;
-
-const SkillHeader = styled(Label)`
-  font-size: 15px;
-  font-weight: 600;
 `;
 
 const HighlightContainer = styled.div`
@@ -117,7 +97,7 @@ const HighlightItem = styled.div`
 `;
 
 const SkillsTitle = styled(Label)`
-  font-size: 22px;
+  font-size: 26px;
   margin-top: 10px;
   font-weight: 600;
 `;
@@ -129,6 +109,7 @@ const HighlightPercentage = styled(Label)`
   color: ${colors.WHITE};
   border-radius: 5px;
   font-size: 18px;
+  text-align: center;
 `;
 
 const HighlightPeople = styled(Label)`
@@ -160,6 +141,17 @@ const Skills = styled.span<SkillsProps>`
       : colors.SECONDARY_DARK};
 `;
 
+const Stack = styled.div`
+  font-size: 12px;
+  padding: 4px 4px;
+  margin-right: 5px;
+  border-radius: 5px;
+  color: ${colors.WHITE};
+  white-space: nowrap;
+  margin-top: 10px;
+  background-color: ${colors.PRIMARY};
+`;
+
 const SkillList = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -167,6 +159,8 @@ const SkillList = styled.div`
   ${Skills}:last-child {
     margin-right: 0px;
   }
+
+  ${Stack}
 `;
 
 const SkillsDescription = styled(Label)`
@@ -174,6 +168,58 @@ const SkillsDescription = styled(Label)`
   margin-top: 5px;
   font-weight: 600;
   line-height: 30px;
+`;
+
+const ProjectsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ProjectItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0px;
+  background-color: ${colors.SECONDARY_LIGHT};
+  padding: 15px;
+  border-radius: 5px;
+
+  box-shadow: 10px 10px ${colors.BLACK};
+`;
+
+const ProjectHeader = styled(Label)`
+  font-size: 18px;
+  font-weight: 600;
+`;
+
+const ProjectDescription = styled(Description)`
+  margin: 0px;
+`;
+
+const Link = styled.a`
+  color: ${colors.WHITE};
+  margin-right: 10px;
+  border-bottom: 1px solid ${colors.WHITE};
+
+  :-webkit-any-link {
+    text-decoration: none;
+    -webkit-text-decoration: none;
+  }
+`;
+
+const ResumeDescription = styled(Label)`
+  text-align: center;
+  font-size: 20px;
+  margin-top: 30px;
+  font-weight: 600;
+`;
+
+const ResumeLink = styled.a`
+  color: ${colors.PRIMARY};
+
+  :-webkit-any-link {
+    text-decoration: none;
+    -webkit-text-decoration: none;
+  }
 `;
 
 const About = () => {
@@ -184,7 +230,7 @@ const About = () => {
   const renderSkillItem = ({ title, skills }: Skill) => {
     return (
       <SkillRoot>
-        <SkillHeader>{title}</SkillHeader>
+        <ProjectHeader>{title}</ProjectHeader>
         <SkillList>{skills.map(renderSkill)}</SkillList>
       </SkillRoot>
     );
@@ -211,6 +257,34 @@ const About = () => {
         <HighlightPercentage>Top {percentage}%</HighlightPercentage>
         <HighlightPeople>of {people} people</HighlightPeople>
       </HighlightItem>
+    );
+  };
+
+  const renderStackItem = (label: string) => {
+    return <Stack>{label}</Stack>;
+  };
+
+  const renderProjectItem = ({
+    name,
+    description,
+    stacks,
+    demo,
+    github,
+  }: Project) => {
+    return (
+      <ProjectItem>
+        <ProjectHeader>{name}</ProjectHeader>
+        <SkillList>{stacks.map(renderStackItem)}</SkillList>
+        <ProjectDescription>{description}</ProjectDescription>
+        <SkillList>
+          <Link href={demo} target="_blank" rel="noreferrer">
+            Live Demo
+          </Link>
+          <Link href={github} target="_blank" rel="noreferrer">
+            Github
+          </Link>
+        </SkillList>
+      </ProjectItem>
     );
   };
 
@@ -263,9 +337,16 @@ const About = () => {
           I'm proficient at.
         </SkillsDescription>
         <SkillsContainer>{skills.map(renderSkillItem)}</SkillsContainer>
-        <Button href="/resume.pdf" target="_blank" rel="noreferrer">
-          Download Resume
-        </Button>
+        <Title>
+          Projects <AltLabel>.</AltLabel>
+        </Title>
+        <ProjectsContainer>{projects.map(renderProjectItem)}</ProjectsContainer>
+        <ResumeDescription>
+          Interested in more of my work? Take a look at my resume{" "}
+          <ResumeLink href="/resume.pdf" target="_blank" rel="noreferrer">
+            here
+          </ResumeLink>
+        </ResumeDescription>
       </TextContainer>
     </Container>
   );

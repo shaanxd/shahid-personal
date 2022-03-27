@@ -126,27 +126,11 @@ const Contact = () => {
         email,
         message,
       });
-      toast.success("Message sent successfully!", {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.success("Message sent successfully!");
       setLoading(false);
     } catch (err) {
       setLoading(false);
-      toast.error("Error occurred while sending message. Please try again.", {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error("Error occurred while sending message. Please try again.");
     }
   };
 
@@ -260,7 +244,7 @@ const Contact = () => {
             </Form>
           )}
         </Formik>
-        <ToastContainer limit={2} />
+        <ToastContainer limit={2} theme="dark" position="bottom-right" />
       </Inner>
     </Container>
   );
